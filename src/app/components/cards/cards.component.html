@@ -1,0 +1,12 @@
+<div class="container">
+
+    <main class="grid">
+        <article class="card" *ngFor="let item of items">
+            <img [src]="item.images | noImage" alt="" class="img-fluid">
+            <div class="card-content">
+                <h3>{{item.name}}</h3>
+                <p *ngFor="let artist of item.artists">{{artist.name}}</p>
+            </div>
+        </article>
+    </main>
+</div>

@@ -1,0 +1,23 @@
+h2 {
+    text-align: center;
+    margin: 2rem;
+    font-size: 40px;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    border-radius: .35rem;
+}
+
+.card-content {
+    padding: 1rem;
+}
