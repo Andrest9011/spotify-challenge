@@ -1,0 +1,52 @@
+nav {
+    background-color: #262628;
+    overflow: hidden;
+    height: 4.5rem;
+}
+
+img {
+    width: 40px;
+}
+
+ul {
+    display: flex;
+    overflow: hidden;
+}
+
+li {
+    list-style: none;
+    margin-left: 120px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(129, 129, 129);
+}
+
+a:hover {
+    color: #fff;
+}
+
+.active {
+    color: #fff;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    margin: 12px;
+}
+
+.logo {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+}
+
+.logo a {
+    margin-left: .5rem;
+    font-size: 20px;
+    text-decoration: none;
+    color: #fff;
+}
