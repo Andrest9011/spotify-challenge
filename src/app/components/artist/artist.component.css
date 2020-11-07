@@ -114,6 +114,7 @@ td {
     flex: 1;
     display: flex;
     max-width: 100%;
+    width: 300px;
 }
 
 .details {
@@ -126,6 +127,33 @@ td {
 
 .about {
     border-bottom: 1px solid rgb(83, 83, 83);
+}
+
+.description {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.description::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.description::-webkit-scrollbar:vertical {
+    width: 3px;
+    height: 3px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: none;
+}
+
+.description {
+    overflow-y: auto;
+    height: 150px;
+    display: flex;
 }
 
 .related-artists {
@@ -143,6 +171,11 @@ td {
     margin-right: 1rem;
 }
 
+.title {
+    font-weight: 300;
+    font-size: 20px;
+}
+
 .albums {
     padding: 1rem;
     border-bottom: 1px solid rgb(83, 83, 83);
@@ -151,15 +184,29 @@ td {
     flex-direction: row;
 }
 
+.albums::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
 
-/* .albums::-webkit-scrollbar {
-    display: none;
-} */
+.albums::-webkit-scrollbar:horizontal {
+    width: 0px;
+    height: 3px;
+}
+
+.albums::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: none;
+}
 
 .albums-content {
     padding-right: 1rem;
     display: flex;
     flex-direction: column;
+}
+
+.image {
+    border-radius: 5px;
 }
 
 .albums-content p {
@@ -168,15 +215,12 @@ td {
 
 .date {
     color: rgb(83, 83, 83);
+    text-align: start !important;
 }
 
 .tracks {
     margin-top: 2rem;
     flex-direction: column;
-}
-
-.tracks h5 {
-    text-align: center;
 }
 
 iframe {
@@ -185,4 +229,35 @@ iframe {
 
 .track-name {
     padding-left: 2rem;
+}
+
+.pagination {
+    margin: 20px 0;
+}
+
+.pagination ul {
+    list-style: none;
+    text-align: end;
+}
+
+.pagination ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.pagination ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    font-size: 20px;
+}
+
+.pagination ul li a:hover {
+    color: rgb(83, 83, 83);
+    background-color: #fff;
 }
