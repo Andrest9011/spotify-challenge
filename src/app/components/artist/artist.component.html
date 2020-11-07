@@ -1,4 +1,4 @@
-<div class="img">
+<!-- <div class="img">
     <div class="content">
         <img [src]="artist.images | noImage" alt="" class="img-circle">
         <div class="info">
@@ -32,4 +32,66 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+
+
+<div class="wrapper">
+    <div class="left">
+        <div class="header">
+            <div class="img-container">
+                <img [src]="artist.images | noImage" alt="" class="img">
+            </div>
+            <div>
+                <h3>{{artist.name}}</h3>
+            </div>
+        </div>
+        <div class="details">
+            <div class="about">
+                <div class="title-about">
+                    <h5>About</h5>
+                </div>
+                <div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat magnam iure ipsam, alias temporibus maiores obcaecati sunt nam dolorem possimus soluta officia nesciunt commodi aut tempora? Obcaecati quibusdam quaerat ab labore eligendi
+                        eum incidunt autem, ut ipsa quod quisquam vitae quasi sunt inventore? Culpa ab quis repellendus, asperiores nemo, aliquid quibusdam fugit amet facilis numquam voluptas, deserunt eligendi dolor provident incidunt. Odio tenetur provident
+                        optio cum recusandae assumenda, ratione fugiat beatae, eveniet, eligendi doloribus rerum! Laboriosam autem mollitia dignissimos quos.</p>
+                </div>
+            </div>
+            <div class="similar">
+                <div class="title-similar">
+                    <h5>Similar to {{artist.name}}</h5>
+                </div>
+                <div class="related-artists">
+                    <div class="related-artist" *ngFor="let releated of releatedArtist">
+                        <img [src]="releated.images | noImage" alt="" class="img-circle img-related">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <h5>Albums</h5>
+        <div>
+            <div class="albums">
+                <div class="albums-content" *ngFor="let album of albums">
+                    <img [src]="album.images | noImage" alt="" class="img-circle img-thumb">
+                    <p>{{album.name}}</p>
+                    <p class="date">{{album.release_date}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="tracks">
+            <h5>Tracks</h5>
+            <table>
+                <tbody>
+                    <tr *ngFor="let track of topTracks">
+                        <td>
+                            <iframe [src]="track.id | domseguro:'https://open.spotify.com/embed/track/'" width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </td>
+                        <td class="track-name">{{track.name}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 </div>

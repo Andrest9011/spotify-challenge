@@ -1,4 +1,4 @@
-img {
+/* img {
     margin-top: 1rem;
 }
 
@@ -72,4 +72,117 @@ td {
 th,
 td {
     padding: 20px;
+} */
+
+.wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+.left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    justify-content: flex-start;
+}
+
+.right {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.img-container {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    overflow: hidden;
+    padding: 1rem;
+    display: flex;
+}
+
+.img {
+    flex: 1;
+    display: flex;
+    max-width: 100%;
+}
+
+.details {
+    padding: 1rem;
+}
+
+.title-about {
+    border-bottom: 1px solid rgb(83, 83, 83);
+}
+
+.about {
+    border-bottom: 1px solid rgb(83, 83, 83);
+}
+
+.related-artists {
+    display: flex;
+    overflow-x: auto;
+}
+
+.related-artist {
+    margin-right: .5rem;
+}
+
+.img-related {
+    height: 50px;
+    width: 50px;
+    margin-right: 1rem;
+}
+
+.albums {
+    padding: 1rem;
+    border-bottom: 1px solid rgb(83, 83, 83);
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* .albums::-webkit-scrollbar {
+    display: none;
+} */
+
+.albums-content {
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.albums-content p {
+    text-align: center;
+}
+
+.date {
+    color: rgb(83, 83, 83);
+}
+
+.tracks {
+    margin-top: 2rem;
+    flex-direction: column;
+}
+
+.tracks h5 {
+    text-align: center;
+}
+
+iframe {
+    border-radius: 5px;
+}
+
+.track-name {
+    padding-left: 2rem;
 }
