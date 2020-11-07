@@ -21,3 +21,7 @@ h2 {
 .card-content {
     padding: 1rem;
 }
+
+.pagination {
+    background-color: blue;
+}

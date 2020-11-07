@@ -1,7 +1,7 @@
 <div class="container">
-
+    <pagination-controls class="pagination" (pageChange)="pageActual = $event"></pagination-controls>
     <main class="grid">
-        <article (click)="artist(item)" class="card puntero" *ngFor="let item of items">
+        <article (click)="artist(item)" class="card puntero" *ngFor="let item of items | paginate: {itemsPerPage: 5, currentPage: pageActual}">
             <img [src]="item.images | noImage" alt="" class="img-fluid">
             <div class="card-content">
                 <h3>{{item.name}}</h3>
@@ -9,4 +9,5 @@
             </div>
         </article>
     </main>
+
 </div>

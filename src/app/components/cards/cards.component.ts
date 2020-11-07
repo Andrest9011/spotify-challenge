@@ -12,6 +12,8 @@ export class CardsComponent implements OnInit {
   @Input() items: any[] = [];
 
   constructor(private router: Router) { }
+  
+  pageActual: number = 1;
 
   artist(item: any){
     let artistId;
