@@ -1,5 +1,3 @@
-<input #termino class="container" type="text" (keyup)="search($event)" placeholder="Buscar...">
+<input #searchInput class="container" type="text" placeholder="Buscar Artista">
 
-<div class="search-result" *ngFor="let result of results$ | async">
-    <p>{{result.name}}</p>
-</div>
+<app-cards [items]="results"></app-cards>

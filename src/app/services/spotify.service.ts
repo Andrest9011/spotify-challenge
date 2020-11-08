@@ -1,25 +1,65 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { map,concatMap} from 'rxjs/operators';
+import { from, of } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
+  
+  accessToken: {
+    token: string;
+    expirationDate: Date;
+  } = {
+    token: '',
+    expirationDate: new Date()
+  }
 
   constructor(private http: HttpClient) {
   }
 
-  getQuery(query: string){
+  getSpotifyToken() {
+    const url = 'https://accounts.spotify.com/api/token';
+    const headers = {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    const body = new HttpParams()
+      .set('grant_type', 'client_credentials')
+      .set('client_id', 'ce98df1ed08845c5b4217af00caed57b')
+      .set('client_secret', '1142be234d824858b8563db8e1194ff4');
 
-    const url = `https://api.spotify.com/v1/${query}`;
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQDupiPlFm_i5BKKqR6tWo8Jk2xwZQ33Seqcfehx2TN0b5lr846q5Kn4G2hz26Sx8awJpEA8MY1La04D6Y8'
+    return this.http.post(url, body, headers).toPromise().then((data: any) => {
+      const expirationDate = new Date();
+      expirationDate.setSeconds(expirationDate.getSeconds() + data.expires_in);
+      this.accessToken = {
+        token: data.access_token,
+        expirationDate,
+      };
+      return data.access_token + '';
     });
+  }
 
-    return this.http.get(url, {headers});
+  getToken() {
 
+    if (new Date().getTime() >= this.accessToken.expirationDate.getTime()) {
+      return from(this.getSpotifyToken());
+    }
+    return of(this.accessToken.token); 
+    
+  }
+
+  getQuery(query: string){
+    const url = `https://api.spotify.com/v1/${query}`;
+    return this.getToken()
+      .pipe(map(token => {
+        return new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+      }), concatMap(headers => this.http.get(url, {headers})));
+    
   }
 
   getNewReleases(){
@@ -29,10 +69,9 @@ export class SpotifyService {
       
   }
 
-  getArtists(termino: string){
-
-    return this.getQuery(`search?q=${termino}&type=album,artist,playlist,track,episode,show&limit=15`)
-    .pipe(map(data => {
+  searchArtists(termino: string) {
+    return this.getQuery(`search?q=${termino}&type=artist&limit=12`)
+    .pipe(map((data: any) => {
       console.log(data);
       return data['artists'].items;
     }));

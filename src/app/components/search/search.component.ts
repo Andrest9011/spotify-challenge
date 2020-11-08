@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
-import { Subject, Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { Subject, Observable, fromEvent, of } from 'rxjs';
+import { debounceTime, map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -9,24 +9,47 @@ import { debounceTime, map } from 'rxjs/operators';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  
-  results$: Observable<any>;
-  subject = new Subject();
+  @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
+
+  results: any;
 
   constructor(private spotify: SpotifyService) { }
 
-  ngOnInit(): void {
-    this.results$ = this.subject.pipe(
-      debounceTime(500),
-      map((searchText: string) => this.spotify.getArtists(searchText))
-    );
+  ngOnInit() {
+
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+
+      // get value
+      map((event: any) => {
+        return event.target.value;
+      })
+      // if character length greater then 2
+      , filter(res => res.length > 2)
+
+      // Time in milliseconds between key events
+      , debounceTime(1000)
+
+      // subscription for response
+    ).subscribe((text: string) => {
+
+
+      this.searchGetCall(text).subscribe((res) => {
+        console.log('res', res);
+        this.results = res;
+      }, (err) => {
+        console.log('error', err);
+      });
+
+    });
   }
 
-  search(evt) {
-    const searchText = evt.target.value;
-    // emits the `searchText` into the stream. This will cause the operators in its pipe function (defined in the ngOnInit method) to be run. `debounceTime` runs and then `map`. If the time interval of 1 sec in debounceTime hasn’t elapsed, map will not be called, thereby saving the server from being called.
-    this.subject.next(searchText)
-}
+  searchGetCall(term: string) {
+    if (term === '') {
+      return of([]);
+    }
+    return this.spotify.searchArtists(term);
+  }
+
   
 
 
