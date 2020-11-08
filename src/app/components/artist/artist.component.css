@@ -130,6 +130,9 @@ td {
 }
 
 .description {
+    overflow-y: auto;
+    height: 150px;
+    display: flex;
     padding: 1rem;
     margin-bottom: 1rem;
     text-align: justify;
@@ -148,12 +151,6 @@ td {
     background-color: #797979;
     border-radius: 20px;
     border: none;
-}
-
-.description {
-    overflow-y: auto;
-    height: 150px;
-    display: flex;
 }
 
 .related-artists {
@@ -223,12 +220,24 @@ td {
     flex-direction: column;
 }
 
+.duration {
+    padding-left: 10rem;
+    color: rgb(83, 83, 83);
+}
+
 iframe {
     border-radius: 5px;
 }
 
 .track-name {
     padding-left: 2rem;
+}
+
+.album-name {
+    font-weight: 300;
+    font-size: 15px;
+    color: rgb(83, 83, 83);
+    margin-top: .5rem;
 }
 
 .pagination {
