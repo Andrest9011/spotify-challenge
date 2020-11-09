@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map,concatMap} from 'rxjs/operators';
 import { from, of } from 'rxjs';
+import { environment } from '../../environments/environment';
+
+
 
 
 @Injectable({
@@ -28,8 +31,8 @@ export class SpotifyService {
     };
     const body = new HttpParams()
       .set('grant_type', 'client_credentials')
-      .set('client_id', 'ce98df1ed08845c5b4217af00caed57b')
-      .set('client_secret', '1142be234d824858b8563db8e1194ff4');
+      .set('client_id', environment.clientID)
+      .set('client_secret', environment.clientSecret);
 
     return this.http.post(url, body, headers).toPromise().then((data: any) => {
       const expirationDate = new Date();
